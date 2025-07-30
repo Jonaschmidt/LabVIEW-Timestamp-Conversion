@@ -1,0 +1,29 @@
+# Compiled binary files
+*.exe
+*.dll
+*.lib
+*.obj
+*.o
+*.exp
+*.pdb
+*.ilk
+
+# VS Code workspace settings
+.vscode/
+
+# Build system files (if using Make or CMake)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# LabVIEW files
+*.viobj
+*.lvlibp
+*.aliases
+*.lvlps
+
+# Misc
+*.log
+*.tmp
+
