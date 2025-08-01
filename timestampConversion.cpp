@@ -1,9 +1,3 @@
-/* TODO: 
-    - C++20 compilation ?
-*/
-#include <iostream> // this can probably be removed
-#include <fstream>  // this can probably be removed
-
 #include <cstdint>
 #include <cmath>
 #include <chrono>
@@ -21,7 +15,7 @@ struct lvTimestamp
 // seems to work for times even before UNIX epoch
 // seems to work for times even before LabVIEW epoch
 __declspec(dllexport)
-void LogTimestampValuesReadableWChrono(const lvTimestamp* timestamp){
+void ConvertToChronoTS(const lvTimestamp* timestamp){
     using namespace std::chrono;
 
     const year_month_day LV_EPOCH = {January/01/1904};
