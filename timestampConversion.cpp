@@ -1,6 +1,7 @@
 #include <cstdint>
 #include <cmath>
 #include <chrono>
+#include <iostream>
 
 extern "C"{
 
@@ -16,9 +17,12 @@ struct lvTimestamp
 // seems to work for times even before LabVIEW epoch
 __declspec(dllexport)
 void ConvertToChronoTS(const lvTimestamp* timestamp){
-    using namespace std::chrono;
+    const std::chrono::year_month_day LV_EPOCH(
+        std::chrono::year(1904),
+        std::chrono::month(1),
+        std::chrono::day(1)
+    );
 
-    const year_month_day LV_EPOCH = {January/01/1904};
     const uint64_t TWO_POW_64 = ~0ULL;  // maximum unit_64 value
 
     int64_t add_seconds = timestamp->seconds;
@@ -27,9 +31,18 @@ void ConvertToChronoTS(const lvTimestamp* timestamp){
     double fractionalSeconds = static_cast<double>(timestamp->fraction) / TWO_POW_64;
     uint16_t add_milliseconds = std::round(fractionalSeconds * 1000);
 
-    sys_time<milliseconds> chronoTimestamp = sys_days(LV_EPOCH) + seconds(add_seconds);
-    chronoTimestamp = chronoTimestamp + milliseconds(add_milliseconds);
+    std::chrono::sys_time<std::chrono::milliseconds> chronoTimestamp =
+        std::chrono::sys_days(LV_EPOCH) +
+        std::chrono::seconds(add_seconds) +
+        std::chrono::milliseconds(add_milliseconds);
 }
+
+/*
+__declspec(dllexport)
+lvTimestamp* ConvertToLVTS(const sys_time<milliseconds> cTimestamp){
+    // temp
+}
+*/
 
 } // extern "C"
 
