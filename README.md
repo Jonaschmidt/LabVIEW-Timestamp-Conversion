@@ -13,5 +13,5 @@ When compiling, be sure the DLL is `x64` compatible. LabVIEW does not accept `x8
 
 # Planned Functionality
 
-- Reverse conversion (`std::chrono::sys_time` to LabVIEW-compatible timestamp)
 - Time zone awareness
+- Possibly, reverse conversion (`std::chrono::sys_time` to LabVIEW-compatible timestamp)
